@@ -7,3 +7,5 @@ excerpt: ''
 date: 2025-12-01
 venue: 'NeurIPS'
 paperurl: 'https://arxiv.org/abs/2507.05362'
+---
+This paper was accepted at NeurIPS 2025.
