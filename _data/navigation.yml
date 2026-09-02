@@ -23,11 +23,5 @@ main:
   # - title: "Blog Posts"
   #   url: /year-archive/
     
-  - title: "CV"
-    url: /files/riccardo_alberghi_resume.pdf
-    
-  # - title: "CV"
-  #   url: /cv-json/
-    
   # - title: "Guide"
   #   url: /markdown/
