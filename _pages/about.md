@@ -1,14 +1,16 @@
 ---
 permalink: /
-title: "About Me"
+title: "Riccardo Alberghi"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-I am currently pursuing a Master of Science in Computer Science for Artificial Intelligence at Bocconi University, where I also earned my Bachelor of Science in Applied Mathematics and Computational Sciences for AI. I work as a Research Assistant in the Department of Computing Sciences at Bocconi.
+I am a Research Assistant in the Department of Computing Sciences at Bocconi University, where I am also pursuing an MSc in Computer Science. I previously earned a BSc in Mathematics there.
 
-My current research focuses on understanding reasoning in Large Language Models (LLMs). I develop controlled scenarios to isolate and study specific characteristics of LLMs. More broadly, I’m interested in how neural networks function and how we can better interpret and optimize them.
+My research focuses on making AI systems more **efficient** and **capable**. In particular, I work on language-model post-training, studying questions that range from how data representations shape learning to the development of reinforcement-learning algorithms.
 
-I have a passion for astronomy. I specialize in imaging deep space objects and contribute to the development of open-source image processing tools based on AI such as [GraXpert](https://graxpert.com/) and [Siril's aberration remover tool](https://gitlab.com/free-astro/siril-scripts). If you are interested you can find my images on my Instagram profile!
+Outside research, I am passionate about astronomy. Rather than spending my nights simply admiring the sky, however, I often end up writing software to process astronomical images (perhaps not the wisest choice). I created Aberrations Remover, a physics-based AI model for correcting optical aberrations, and I am incredibly proud that it has been downloaded more than **24,000** times.
+
+<img src="{{ '/images/PHOTO-2024-11-01-02-50-19.jpg' | relative_url }}" alt="The Crescent Nebula photographed by Riccardo Alberghi" class="align-center" width="640" loading="lazy" decoding="async">
