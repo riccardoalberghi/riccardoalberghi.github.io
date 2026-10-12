@@ -1,0 +1,591 @@
+/* Interactive figures and math boxes for blog posts (see assets/js/blog-widgets.js).
+ *
+ * Figures sit on a dark panel in both site themes: the images are mostly
+ * stars on a black sky, so the panel frames them like an instrument display.
+ * The math boxes follow the site theme through its CSS variables.
+ */
+
+.bw {
+  --bw-bg: #0e1116;
+  --bw-raised: #171c25;
+  --bw-fg: #d9dee7;
+  --bw-dim: #8b93a3;
+  --bw-line: #2a3140;
+  --bw-accent: #59c2ff;
+  --bw-warm: #ffb454;
+  display: block;
+  margin: 2em 0;
+  padding: 14px;
+  color: var(--bw-fg);
+  background: var(--bw-bg);
+  border: 1px solid var(--bw-line);
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.bw img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 6px;
+}
+
+.bw__img {
+  width: 100%;
+}
+
+.bw .bw__img--square {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.bw figcaption {
+  margin: 12px 2px 0;
+  color: var(--bw-dim);
+  font-family: inherit;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.bw figcaption strong {
+  color: var(--bw-fg);
+}
+
+/* Image panels ------------------------------------------------------------ */
+
+.bw__stage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.bw__panel {
+  flex: 1 1 300px;
+  min-width: 0;
+  max-width: 420px;
+}
+
+.bw__panel--pupil {
+  flex: 0 1 200px;
+  max-width: 220px;
+  align-self: center;
+}
+
+.bw__panel img {
+  width: 100%;
+}
+
+.bw__label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--bw-dim);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.bw-stack {
+  position: relative;
+}
+
+.bw-stack img + img {
+  position: absolute;
+  inset: 0;
+}
+
+.bw--anim img {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* Controls ---------------------------------------------------------------- */
+
+.bw__bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.bw__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: flex-end;
+  margin-top: 14px;
+}
+
+.bw__controls--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.bw-slider {
+  display: block;
+  flex: 1 1 200px;
+  margin: 0;
+  color: var(--bw-fg);
+  font-size: 13.5px;
+}
+
+.bw-slider__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75em;
+  margin-bottom: 2px;
+}
+
+.bw output {
+  color: var(--bw-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.bw input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.bw input[type="range"]:focus {
+  outline: none;
+}
+
+.bw input[type="range"]:focus-visible {
+  outline: 2px solid var(--bw-accent);
+  outline-offset: 2px;
+}
+
+.bw input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--bw-line);
+  border-radius: 2px;
+}
+
+.bw input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  background: var(--bw-accent);
+  border: 3px solid var(--bw-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--bw-accent);
+}
+
+.bw input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: var(--bw-line);
+  border-radius: 2px;
+}
+
+.bw input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: var(--bw-accent);
+  border: 3px solid var(--bw-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--bw-accent);
+}
+
+/* Segmented buttons made of radio inputs. */
+.bw-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border: 1px solid var(--bw-line);
+  border-radius: 8px;
+}
+
+.bw-toggle label {
+  position: relative;
+  display: block;
+  margin: 0;
+  color: inherit;
+}
+
+.bw-toggle label + label {
+  border-left: 1px solid var(--bw-line);
+}
+
+.bw-toggle input,
+.bw-chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.bw-toggle span {
+  display: block;
+  padding: 0.4em 0.95em;
+  color: var(--bw-dim);
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+.bw-toggle label:hover span {
+  color: var(--bw-fg);
+}
+
+.bw-toggle input:checked + span {
+  color: var(--bw-fg);
+  background: var(--bw-raised);
+  box-shadow: inset 0 -2px 0 var(--bw-accent);
+}
+
+.bw-toggle input:focus-visible + span {
+  outline: 2px solid var(--bw-accent);
+  outline-offset: -2px;
+}
+
+.bw-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  padding: 0.4em 0.95em;
+  color: var(--bw-fg);
+  background: var(--bw-raised);
+  border: 1px solid var(--bw-line);
+  border-radius: 8px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.bw-play:hover,
+.bw-play:focus-visible {
+  border-color: var(--bw-accent);
+}
+
+.bw-play[aria-pressed="true"] .bw-play__play,
+.bw-play[aria-pressed="false"] .bw-play__pause {
+  display: none;
+}
+
+.bw-readouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 12px;
+  color: var(--bw-dim);
+  font-size: 13.5px;
+}
+
+.bw-readouts b {
+  color: var(--bw-fg);
+  font-weight: 600;
+}
+
+/* Zernike pyramid: radio inputs whose labels are thumbnails. */
+.bw-pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.bw-pyramid__row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.bw-chip {
+  position: relative;
+  display: block;
+  width: 62px;
+  margin: 0;
+  padding: 4px 2px 3px;
+  color: var(--bw-dim);
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.bw-chip img {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.bw-chip span {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.bw-chip:hover {
+  border-color: var(--bw-line);
+}
+
+.bw-chip:has(input:checked) {
+  color: var(--bw-fg);
+  background: var(--bw-raised);
+  border-color: var(--bw-accent);
+}
+
+.bw-chip input:checked + img {
+  box-shadow: 0 0 0 2px var(--bw-accent);
+}
+
+.bw-chip:has(input:focus-visible) {
+  outline: 2px solid var(--bw-accent);
+  outline-offset: 1px;
+}
+
+/* Before/after wipe -------------------------------------------------------- */
+
+.bw-compare {
+  --bw-pos: 50%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bw-compare img {
+  width: 100%;
+  border-radius: 0;
+}
+
+.bw-compare__top {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 calc(100% - var(--bw-pos)) 0 0);
+}
+
+.bw-compare__top img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.bw-compare__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--bw-pos);
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+}
+
+.bw-compare__handle::after {
+  content: "\2194";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  font-size: 18px;
+  background: rgba(14, 17, 22, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bw-compare__tag {
+  position: absolute;
+  top: 10px;
+  padding: 2px 8px;
+  color: #fff;
+  font-size: 12px;
+  background: rgba(14, 17, 22, 0.75);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.bw-compare__tag--left {
+  left: 10px;
+}
+
+.bw-compare__tag--right {
+  right: 10px;
+}
+
+.bw-compare input[type="range"] {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+/* Math refreshers: <details class="math-box"> ------------------------------- */
+
+.math-box {
+  margin: 1.5em 0;
+  background: color-mix(in srgb, var(--global-link-color) 6%, transparent);
+  border: 1px solid var(--global-border-color);
+  border-left: 4px solid var(--global-link-color);
+  border-radius: 6px;
+}
+
+.math-box > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.65em 1em;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.math-box > summary::-webkit-details-marker {
+  display: none;
+}
+
+.math-box > summary::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.15s ease;
+}
+
+.math-box[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+.math-box__tag {
+  padding: 0.05em 0.45em;
+  color: var(--global-link-color);
+  font-size: 0.7em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+}
+
+.math-box > :not(summary) {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.math-box > :last-child {
+  margin-bottom: 1em;
+}
+
+/* Small screens ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+  .bw {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .bw-chip {
+    width: 54px;
+  }
+
+  .bw-chip img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .bw-toggle span {
+    padding: 0.4em 0.7em;
+  }
+
+  .math-box > :not(summary) {
+    margin-left: 0.85rem;
+    margin-right: 0.85rem;
+  }
+}
+
+/* Author's note under the title: <aside class="post-disclaimer"> -------- */
+
+.post-disclaimer {
+  display: block;
+  margin: 0 0 1.75em;
+  padding: 0.7em 1em;
+  color: var(--global-text-color);
+  font-size: 0.85em;
+  line-height: 1.55;
+  background: color-mix(in srgb, var(--global-text-color) 4%, transparent);
+  border: 1px solid var(--global-border-color);
+  border-left: 4px solid color-mix(in srgb, var(--global-text-color) 40%, transparent);
+  border-radius: 6px;
+}
+
+.post-disclaimer__tag {
+  display: inline-block;
+  margin-right: 0.6em;
+  padding: 0.05em 0.45em;
+  font-size: 0.75em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: 0.1em;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+/* MathJax does not wrap long equations: let them scroll instead of widening the page. */
+.page__content mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* The theme's tables do not scroll: on narrow screens let them, instead of widening the page. */
+@media (max-width: 768px) {
+  .page__content table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* In-post table of contents: <div class="post-toc" markdown="1"> ---------- */
+
+.post-toc {
+  margin: 1.5em 0 2em;
+  padding: 0.75em 1.25em 0.5em;
+  font-size: 0.9em;
+  border: 1px solid var(--global-border-color);
+  border-radius: 6px;
+}
+
+.post-toc p {
+  margin: 0 0 0.4em;
+}
+
+.post-toc ul {
+  margin: 0 0 0.4em;
+  padding-left: 1.2em;
+}
+
+.post-toc li {
+  margin: 0.1em 0;
+}
+
+.post-toc ul ul {
+  margin: 0;
+}

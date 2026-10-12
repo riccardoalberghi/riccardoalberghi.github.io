@@ -1,3 +1,6 @@
 <script src="{{ base_path }}/assets/js/main.min.js"></script>
 
+{% for script in page.extra_js %}<script src="{{ script | relative_url }}" defer></script>
+{% endfor %}
+
 {% include analytics.html %}
